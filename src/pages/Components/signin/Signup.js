@@ -43,7 +43,7 @@ export const Signup = () => {
       name: "email",
       required: true,
       placeholder: "first name",
-      type: "text",
+      type: "email",
     },
     {
       label: "Password",
@@ -85,6 +85,7 @@ export const Signup = () => {
       <Header />
       <section className="main">
         <Form className="m-5 p-5 border shadow-lg" onSubmit={handleSubmit}>
+          <h2>New Admin</h2>
           {inputs.map((item, i) => (
             <CustomInput key={i} handleChange={handleOnChange} {...item} />
           ))}
