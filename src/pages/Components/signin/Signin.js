@@ -34,11 +34,13 @@ export const Signin = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { status } = await checkAuth(form);
+    const { status, message } = await checkAuth(form);
 
     if (status === "success") {
       toast.success("success to login");
       navigate("/");
+    } else {
+      toast.error(message);
     }
     // console.log(result);
   };
