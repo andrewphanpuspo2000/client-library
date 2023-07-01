@@ -10,6 +10,6 @@ export const postUser = async (item) => {
 };
 
 export const checkAuth = async (item) => {
-  const { data } = await axios.get(userAPI, { params: item });
+  const { data } = await axios.get(userAPI + "/login", { params: item });
   return data;
 };

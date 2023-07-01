@@ -7,6 +7,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { postUser } from "../../../helper/axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const Signup = () => {
   const inputs = [
@@ -60,6 +61,7 @@ export const Signup = () => {
       type: "password",
     },
   ];
+  const { user } = useSelector((status) => status.userInfo);
   const [form, setForm] = useState({});
   const navigate = useNavigate();
   const handleOnChange = (e) => {
@@ -85,7 +87,22 @@ export const Signup = () => {
       <Header />
       <section className="main">
         <Form className="m-5 p-5 border shadow-lg" onSubmit={handleSubmit}>
-          <h2>New Admin</h2>
+          <h2>Create New Account {user?.role === "admin" && " For Admin"}</h2>
+          <hr />
+          {user.role === "admin" && (
+            <Form.Group className="mb-3">
+              <Form.Label>Select user type</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
+                name="role"
+                onChange={handleOnChange}
+                required
+              >
+                <option value="admin">Admin</option>
+                <option value="student">Student</option>
+              </Form.Select>
+            </Form.Group>
+          )}
           {inputs.map((item, i) => (
             <CustomInput key={i} handleChange={handleOnChange} {...item} />
           ))}
