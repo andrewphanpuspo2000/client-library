@@ -5,3 +5,18 @@
   width: 250px;
   min-height: 100vh;
 }
+.carousel {
+  height: 60vh;
+}
+
+.carousel img {
+  height: 60vh;
+}
+
+.btn-delete {
+  width: 100%;
+}
+
+.layout-padding > li {
+  padding-left: 1rem;
+}

@@ -11,34 +11,37 @@ export const UserLayout = ({ children, title }) => {
       <div className="left-menu bg-dark text-light">
         <div className="text-center mt-3">{user?.role?.toUpperCase()}</div>
         <hr />
-        <ul className="p-0">
-          <li className="list-unstyled">
+        <ul className="p-0 layout-padding">
+          <li className="list-unstyled ">
             <Link to="/dashboard" className="nav-link">
               DashBoard
             </Link>
           </li>
-          <li className="list-unstyled">
+          <li className="list-unstyled mt-3 ">
             <Link to="/borrowHistory" className="nav-link">
               Borrow History
             </Link>
           </li>
-          <li className="list-unstyled">
+          <li className="list-unstyled mt-3 ">
             <Link to="/book" className="nav-link">
               Books
             </Link>
           </li>
-          <li className="list-unstyled">
+          <li className="list-unstyled mt-3 ">
             <Link to="/student" className="nav-link">
               Student
             </Link>
           </li>
           <hr />
-          <li className="list-unstyled ">
-            <Link to="/new-user" className="nav-link">
-              Add Admin
-            </Link>
-          </li>
-          <li className="list-unstyled ">
+          {user?.role === "admin" && (
+            <li className="list-unstyled mt-3 ">
+              <Link to="/new-user" className="nav-link">
+                Add Admin
+              </Link>
+            </li>
+          )}
+
+          <li className="list-unstyled mt-3 ">
             <Link to="/profile" className="nav-link">
               Profile
             </Link>

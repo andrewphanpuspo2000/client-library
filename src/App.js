@@ -13,8 +13,17 @@ import { BorrowBook } from "./pages/Borrow-Book/BorrowBook";
 import { Books } from "./pages/Books";
 import { Student } from "./pages/Student";
 import { Profile } from "./pages/Profile";
+import { NewBookForm } from "./pages/Components/Book-com/NewBookForm";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchBook } from "./pages/Components/Book-com/bookAction";
+import { EditBook } from "./pages/Components/Book-com/EditBook";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchBook());
+  }, [dispatch]);
   return (
     <div className="">
       <Routes>
@@ -61,7 +70,24 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/book/newbook"
+          element={
+            <PrivateRoute>
+              <NewBookForm />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/book/newbook/editbook/:_id"
+          element={
+            <PrivateRoute>
+              <EditBook />
+            </PrivateRoute>
+          }
+        />
       </Routes>
+
       <ToastContainer />
     </div>
   );
