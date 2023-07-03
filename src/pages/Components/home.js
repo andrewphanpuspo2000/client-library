@@ -1,38 +1,36 @@
 import { Layout } from "./layout/Layout";
-import Carousel from "react-bootstrap/Carousel";
-import a from "../../assets/a.jpg";
-import b from "../../assets/b.jpg";
-import c from "../../assets/c.jpg";
+import { Slides } from "./Carousel";
+import { Col, Row, Form, Container } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { Cards } from "./Cards";
+
 export const Home = () => {
+  const { books } = useSelector((state) => state.booksCol);
   return (
     <Layout>
-      <Carousel className="carousel">
-        <Carousel.Item>
-          <img className="d-block w-100" src={a} alt="First slide" />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={b} alt="Second slide" />
-
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={c} alt="Third slide" />
-
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
+      <Slides />
+      <Container className="my-5">
+        <Row>
+          <Col>
+            <div className="d-flex justify-content-around">
+              {books.length > 1 ? (
+                <div className="left">{books.length} books</div>
+              ) : (
+                <div className="left">{books.length} book</div>
+              )}
+              <div className="right">
+                <Form.Control placeholder="serach book by name" />
+              </div>
+            </div>
+            <hr />
+            <div className="book-list d-flex justify-content-between flex-wrap gap-3 mt-5">
+              {books.map((item) => (
+                <Cards key={item._id} {...item} />
+              ))}
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </Layout>
   );
 };

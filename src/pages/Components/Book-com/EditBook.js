@@ -30,7 +30,8 @@ export const EditBook = () => {
 
   const handleOnUpdate = async (e) => {
     e.preventDefault();
-    dispatch(editingBook(form));
+    const result = await dispatch(editingBook(form));
+    if (result === "success") navigate("/book");
     console.log(form);
   };
   const deleteOnHandle = async () => {

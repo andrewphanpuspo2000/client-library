@@ -32,7 +32,10 @@ export const fetchBook = () => async (dispatch) => {
 export const editingBook = (item) => async (dispatch) => {
   const { status, message } = await editBook(item);
   toast[status](message);
-  if (status === "success") dispatch(fetchBook());
+  if (status === "success") {
+    dispatch(fetchBook());
+    return status;
+  }
 };
 
 export const deleteOneBook = (id) => async (dispatch) => {

@@ -23,7 +23,9 @@ export const BookTable = ({ book }) => {
             <td>{item.title}</td>
             <td>{item.author}</td>
             <td>{item.year}</td>
-            <td>{item.thumbnail}</td>
+            <td>
+              <img src={item.thumbnail} />
+            </td>
             <td>{item.summary}</td>
             <td>
               <Link to={`/book/newbook/editbook/${item._id}`}>
