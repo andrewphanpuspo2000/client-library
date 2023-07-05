@@ -16,6 +16,7 @@ const store = configureStore({
   reducer: {
     userInfo: persistedUserReducer,
     booksCol: bookCollection,
+    searchBook: bookCollection,
   },
 });
 

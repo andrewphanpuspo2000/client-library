@@ -4,8 +4,9 @@ import {
   editBook,
   getBook,
   postBook,
+  seekBook,
 } from "../../../helper/axios";
-import { setBooks } from "./bookSlice";
+import { setBooks, setSearch } from "./bookSlice";
 
 export const addBook = (userObj) => async (dispatch) => {
   const dataPending = postBook(userObj);
@@ -46,4 +47,9 @@ export const deleteOneBook = (id) => async (dispatch) => {
     dispatch(fetchBook());
     return status;
   }
+};
+
+export const retrieveBook = (item) => async (dispatch) => {
+  const { status, message } = await seekBook(item);
+  if (status === "success") dispatch(setSearch(message));
 };
