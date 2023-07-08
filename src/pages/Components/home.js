@@ -5,21 +5,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { Cards } from "./Cards";
 import { useEffect, useState } from "react";
 import { retrieveBook } from "./Book-com/bookAction";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const { books } = useSelector((state) => state.booksCol);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState([]);
   // const [searchCol, setSearchCol] = useState([]);
-  const { searchBooks } = useSelector((state) => state.searchBook);
+
   const dispatch = useDispatch();
 
   const handleSearch = async (e) => {
     const { value } = e.target;
-    setSearch(value);
+    const filter = books.filter((item) => item.title.includes(value));
+    setSearch(filter);
   };
   useEffect(() => {
-    dispatch(retrieveBook(search));
-  }, [search]);
+    setSearch(books);
+  }, [books]);
   return (
     <Layout>
       <Slides />
@@ -27,10 +29,10 @@ export const Home = () => {
         <Row>
           <Col>
             <div className="d-flex justify-content-around">
-              {books.length > 1 ? (
-                <div className="left">{books.length} books</div>
+              {search.length > 1 ? (
+                <div className="left">{search.length} books</div>
               ) : (
-                <div className="left">{books.length} book</div>
+                <div className="left">{search.length} book</div>
               )}
               <div className="right">
                 <Form.Control
@@ -41,11 +43,13 @@ export const Home = () => {
             </div>
             <hr />
             <div className="book-list d-flex justify-content-between flex-wrap gap-3 mt-5">
-              {Array.isArray(searchBooks) && searchBooks.length > 0
-                ? searchBooks.map((item, i) => (
+              {Array.isArray(search) &&
+                search.length > 0 &&
+                search.map((item, i) => (
+                  <Link to={`/book/landing/${item._id}`}>
                     <Cards key={item._id} {...item} />
-                  ))
-                : books.map((item) => <Cards key={item._id} {...item} />)}
+                  </Link>
+                ))}
             </div>
           </Col>
         </Row>

@@ -18,7 +18,7 @@ export const UserLayout = ({ children, title }) => {
             </Link>
           </li>
           <li className="list-unstyled mt-3 ">
-            <Link to="/borrowHistory" className="nav-link">
+            <Link to={`/borrowHistory/${user._id}`} className="nav-link">
               Borrow History
             </Link>
           </li>

@@ -24,3 +24,18 @@
 .book-list {
   width: 100%;
 }
+.left-review {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+}
+
+@media (max-width: 469px) {
+  .card-containers {
+    width: 100% !important;
+  }
+}

@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchBook } from "./pages/Components/Book-com/bookAction";
 import { EditBook } from "./pages/Components/Book-com/EditBook";
+import { BookLanding } from "./pages/Components/Book-com/BookLanding";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function App() {
         <Route path="/new-user" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route
-          path="/borrowHistory"
+          path="/borrowHistory/:_id"
           element={
             <PrivateRoute>
               <BorrowBook />
@@ -86,6 +87,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/book/landing/:_id" element={<BookLanding />} />
       </Routes>
 
       <ToastContainer />

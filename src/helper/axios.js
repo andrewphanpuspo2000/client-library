@@ -3,6 +3,7 @@ import axios from "axios";
 const rootAPI = "http://localhost:8000";
 const userAPI = rootAPI + "/api/v1/user";
 const bookAPI = rootAPI + "/api/v1/book";
+const borrowAPI = rootAPI + "/api/v1/borrow";
 export const postUser = async (item) => {
   const respond = await axios.post(userAPI, item);
   const { data } = respond;
@@ -41,5 +42,15 @@ export const deletingBook = async (id) => {
 export const seekBook = async (search) => {
   const { data } = await axios.post(bookAPI + "/search" + "/" + search);
   console.log(data);
+  return data;
+};
+
+export const addBorrowBook = async (item) => {
+  const { data } = await axios.post(borrowAPI, item);
+  return data;
+};
+
+export const getBorrowBook = async () => {
+  const { data } = await axios.get(borrowAPI);
   return data;
 };
