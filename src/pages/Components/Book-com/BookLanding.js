@@ -5,15 +5,18 @@ import { Layout } from "../layout/Layout";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { addBorrowAction } from "../../Borrow-Book/borrowAction";
 import { useEffect } from "react";
+import { fetchBook } from "./bookAction";
 
 export const BookLanding = () => {
   const { _id } = useParams();
   const { books } = useSelector((state) => state.booksCol);
+  const { borrowed } = useSelector((state) => state.borrowCollection);
   const { thumbnail, title, author, year, summary, isAvailable, dueDate } =
     books.find((item) => item._id === _id) || {};
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userInfo);
   const borrowtime = dueDate?.slice(0, 10);
+
   const borrowHandle = () => {
     if (window.confirm("Do you want to borrow?")) {
       const result = dispatch(
@@ -27,9 +30,10 @@ export const BookLanding = () => {
       );
     }
   };
+
   useEffect(() => {
-    console.log(dueDate);
-  }, [books]);
+    dispatch(fetchBook());
+  }, [dispatch]);
   return (
     <Layout>
       <section className="main mt-4">

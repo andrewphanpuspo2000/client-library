@@ -4,6 +4,21 @@ const rootAPI = "http://localhost:8000";
 const userAPI = rootAPI + "/api/v1/user";
 const bookAPI = rootAPI + "/api/v1/book";
 const borrowAPI = rootAPI + "/api/v1/borrow";
+
+const getLocalStorageInfo = () => {
+  const str = localStorage.getItem("persist:userInfo");
+  console.log(str);
+  if (str) {
+    const userInfo = JSON.parse(str);
+    console.log(userInfo);
+    if (userInfo.user) {
+      const user = JSON.parse(userInfo.user);
+      console.log(user);
+      return user?._id;
+    }
+  }
+};
+
 export const postUser = async (item) => {
   const respond = await axios.post(userAPI, item);
   const { data } = respond;
@@ -16,7 +31,11 @@ export const checkAuth = async (item) => {
 };
 
 export const postBook = async (item) => {
-  const respond = await axios.post(bookAPI, item);
+  const respond = await axios.post(bookAPI, item, {
+    headers: {
+      Authorization: getLocalStorageInfo(),
+    },
+  });
   const { data } = respond;
   return data;
 };
@@ -34,7 +53,11 @@ export const editBook = async (item) => {
 };
 
 export const deletingBook = async (id) => {
-  const result = await axios.delete(bookAPI + "/" + id);
+  const result = await axios.delete(bookAPI + "/" + id, {
+    headers: {
+      Authorization: getLocalStorageInfo(),
+    },
+  });
   console.log(result);
   return result.data;
 };
@@ -46,11 +69,30 @@ export const seekBook = async (search) => {
 };
 
 export const addBorrowBook = async (item) => {
-  const { data } = await axios.post(borrowAPI, item);
+  const { data } = await axios.post(borrowAPI, item, {
+    headers: {
+      Authorization: getLocalStorageInfo(),
+    },
+  });
   return data;
 };
 
 export const getBorrowBook = async () => {
-  const { data } = await axios.get(borrowAPI);
+  const { data } = await axios.get(borrowAPI, {
+    headers: {
+      Authorization: getLocalStorageInfo(),
+    },
+  });
+  return data;
+};
+
+export const returnBookHelper = async (item) => {
+  console.log(item);
+  const { data } = await axios.patch(borrowAPI + "/return", item, {
+    headers: {
+      Authorization: getLocalStorageInfo(),
+    },
+  });
+  console.log(data);
   return data;
 };

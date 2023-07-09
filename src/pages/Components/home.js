@@ -14,14 +14,16 @@ export const Home = () => {
 
   const dispatch = useDispatch();
 
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     const { value } = e.target;
-    const filter = books.filter((item) => item.title.includes(value));
+    const filter = books.filter((item) =>
+      item.title.toLowerCase().includes(value.toLowerCase())
+    );
     setSearch(filter);
   };
   useEffect(() => {
     setSearch(books);
-  }, [books]);
+  }, []);
   return (
     <Layout>
       <Slides />
@@ -42,7 +44,7 @@ export const Home = () => {
               </div>
             </div>
             <hr />
-            <div className="book-list d-flex justify-content-between flex-wrap gap-3 mt-5">
+            <div className="book-list d-flex  flex-wrap gap-3 mt-5">
               {Array.isArray(search) &&
                 search.length > 0 &&
                 search.map((item, i) => (

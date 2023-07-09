@@ -75,12 +75,13 @@ export const Signup = () => {
     if (form.password !== form.confirmPassword) {
       return toast.error("passwords are not match");
     }
-    const resp = await postUser(form);
-    if (resp.status === "success") {
+    const { status, message } = await postUser(form);
+    if (status === "success") {
       toast.success("data has been inputted");
       navigate("/signin");
+    } else {
+      toast[status](message);
     }
-    console.log(resp);
   };
   return (
     <div>

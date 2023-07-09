@@ -1,5 +1,7 @@
 .main {
   min-height: calc(100vh - 169px);
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 .left-menu {
   width: 250px;
@@ -23,6 +25,7 @@
 
 .book-list {
   width: 100%;
+  justify-content: space-between;
 }
 .left-review {
   width: 4rem;
@@ -34,8 +37,24 @@
   color: white;
 }
 
+.number-book {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  background: rgb(58, 56, 56);
+  padding: 2rem;
+  border-radius: 3px;
+  box-shadow: 0 0 10px;
+  height: 20%;
+}
 @media (max-width: 469px) {
   .card-containers {
     width: 100% !important;
+  }
+  .book-list {
+    justify-content: center !important;
   }
 }
