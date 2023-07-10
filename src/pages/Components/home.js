@@ -4,15 +4,12 @@ import { Col, Row, Form, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Cards } from "./Cards";
 import { useEffect, useState } from "react";
-import { retrieveBook } from "./Book-com/bookAction";
+import { fetchBook, retrieveBook } from "./Book-com/bookAction";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
   const { books } = useSelector((state) => state.booksCol);
   const [search, setSearch] = useState([]);
-  // const [searchCol, setSearchCol] = useState([]);
-
-  const dispatch = useDispatch();
 
   const handleSearch = (e) => {
     const { value } = e.target;
@@ -23,7 +20,7 @@ export const Home = () => {
   };
   useEffect(() => {
     setSearch(books);
-  }, []);
+  }, [books]);
   return (
     <Layout>
       <Slides />

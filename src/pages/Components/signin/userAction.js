@@ -5,5 +5,10 @@ export const signInAdminAction = (userObj) => async (dispatch) => {
   const { status, message, user } = await checkAuth(userObj);
   console.log(status);
   user && dispatch(setUser(user));
-  toast[status](message);
+
+  if (status === "success") {
+    toast[status](message);
+  } else {
+    toast.error(message);
+  }
 };

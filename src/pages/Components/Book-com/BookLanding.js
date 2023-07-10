@@ -6,6 +6,9 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { addBorrowAction } from "../../Borrow-Book/borrowAction";
 import { useEffect } from "react";
 import { fetchBook } from "./bookAction";
+import { Comment } from "./Comment";
+import { CommentList } from "./CommentList";
+import { getComments } from "../comment/commentAction";
 
 export const BookLanding = () => {
   const { _id } = useParams();
@@ -16,6 +19,7 @@ export const BookLanding = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userInfo);
   const borrowtime = dueDate?.slice(0, 10);
+  const { comments } = useSelector((state) => state.commentCollection);
 
   const borrowHandle = () => {
     if (window.confirm("Do you want to borrow?")) {
@@ -33,6 +37,8 @@ export const BookLanding = () => {
 
   useEffect(() => {
     dispatch(fetchBook());
+    dispatch(getComments());
+    console.log(comments);
   }, [dispatch]);
   return (
     <Layout>
@@ -73,17 +79,18 @@ export const BookLanding = () => {
             <Col>
               <h3>Review</h3>
               <hr />
+              <Comment bookId={_id} />
               <div className="review-list">
-                <div className="review-item d-flex gap-3  p-3 shadow-lg">
-                  <div className="left-review p-5 bg-primary">PA</div>
-                  <div className="right-review">
-                    <div className="comment">
-                      <h4>Amazing Book</h4>
-                      <p>lorem sdmaopkdosa osadmjpodmoadmosmasod</p>
-                      <p>-Andrew</p>
-                    </div>
-                  </div>
-                </div>
+                {comments.map(
+                  (item, i) =>
+                    item.bookId === _id && (
+                      <CommentList
+                        key={item._id}
+                        comment={item.comment}
+                        author={item.userName}
+                      />
+                    )
+                )}
               </div>
             </Col>
           </Row>

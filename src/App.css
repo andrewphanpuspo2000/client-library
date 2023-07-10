@@ -50,6 +50,13 @@
   box-shadow: 0 0 10px;
   height: 20%;
 }
+
+.comment-form {
+  flex-direction: column;
+}
+.comment-form button {
+  align-self: flex-end;
+}
 @media (max-width: 469px) {
   .card-containers {
     width: 100% !important;

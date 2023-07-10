@@ -4,6 +4,7 @@ const rootAPI = "http://localhost:8000";
 const userAPI = rootAPI + "/api/v1/user";
 const bookAPI = rootAPI + "/api/v1/book";
 const borrowAPI = rootAPI + "/api/v1/borrow";
+const commentAPI = rootAPI + "/api/v1/comment";
 
 const getLocalStorageInfo = () => {
   const str = localStorage.getItem("persist:userInfo");
@@ -94,5 +95,15 @@ export const returnBookHelper = async (item) => {
     },
   });
   console.log(data);
+  return data;
+};
+
+export const postComment = async (item) => {
+  const { data } = await axios.post(commentAPI, item);
+  return data;
+};
+
+export const retrieveComment = async () => {
+  const { data } = await axios.get(commentAPI);
   return data;
 };

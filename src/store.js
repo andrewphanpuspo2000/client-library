@@ -4,6 +4,8 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import bookCollection from "./pages/Components/Book-com/bookSlice";
 import borrowCol from "./pages/Borrow-Book/borrowSlice";
+import commentCol from "./pages/Components/comment/commentSlice";
+
 const userPresistConfig = {
   key: "userInfo",
   storage,
@@ -17,6 +19,7 @@ const store = configureStore({
     userInfo: persistedUserReducer,
     booksCol: bookCollection,
     borrowCollection: borrowCol,
+    commentCollection: commentCol,
   },
 });
 
