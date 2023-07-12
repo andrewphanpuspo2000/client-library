@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-
 export const CommentList = ({ comment, author }) => {
   const avatar = author?.slice(0, 2);
   return (

@@ -20,7 +20,7 @@ export const addBorrowAction = (data) => async (dispatch) => {
 
 export const getAllBorrowed = () => async (dispatch) => {
   const { status, message, result } = await getBorrowBook();
-
+  console.log(result);
   if (status === "success") {
     dispatch(setBorrowedBook(result));
   }

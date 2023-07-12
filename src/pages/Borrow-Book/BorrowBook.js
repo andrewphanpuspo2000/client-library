@@ -19,7 +19,7 @@ export const BorrowBook = () => {
   useEffect(() => {
     dispatch(getAllBorrowed());
     // console.log(borrowed);
-  }, [dispatch, borrowed]);
+  }, [dispatch]);
   return (
     <UserLayout title="Borrow History">
       <Table striped bordered hover>
@@ -43,9 +43,17 @@ export const BorrowBook = () => {
                 </td>
                 <td>{item.dueDate?.slice(0, 10)}</td>
                 <td>{item.returnDate?.slice(0, 10)}</td>
-                <td>
-                  <Button onClick={() => returnBook(item)}>Return</Button>
-                </td>
+                {!item.isReturned ? (
+                  <td>
+                    <Button onClick={() => returnBook(item)}>Return</Button>
+                  </td>
+                ) : (
+                  <td>
+                    <Button disabled="true" variant="secondary">
+                      Returned
+                    </Button>
+                  </td>
+                )}
               </tr>
             ))}
         </tbody>
