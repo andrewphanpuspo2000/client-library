@@ -4,13 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { getAllBorrowed, returnBookAction } from "./borrowAction";
+import { ReviewForm } from "../Components/review/ReviewForm";
+import { CustomModal } from "./CustomModal";
+import { setSystem } from "./systemSlice";
 export const BorrowBook = () => {
   const dispatch = useDispatch();
   const { borrowed } = useSelector((state) => state.borrowCollection);
   const { _id } = useParams();
-
+  const [selectedReview, setSelectedReview] = useState({});
   const filterBorrow = borrowed.filter((item) => item.userId === _id);
-
+  const handleOnReview = (borrowBook) => {
+    setSelectedReview(borrowBook);
+    dispatch(setSystem(true));
+  };
   const returnBook = ({ bookId, _id }) => {
     console.log(bookId, _id);
     dispatch(returnBookAction({ bookId, _id }));
@@ -22,6 +28,11 @@ export const BorrowBook = () => {
   }, [dispatch]);
   return (
     <UserLayout title="Borrow History">
+      {selectedReview?._id && (
+        <CustomModal modalTitle="Review">
+          <ReviewForm bookitem={selectedReview} />
+        </CustomModal>
+      )}
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -33,8 +44,8 @@ export const BorrowBook = () => {
           </tr>
         </thead>
         <tbody>
-          {filterBorrow.length &&
-            filterBorrow.map((item, i) => (
+          {borrowed.length &&
+            borrowed.map((item, i) => (
               <tr key={item._id}>
                 <td>{i + 1}</td>
                 <td>{item.bookName}</td>
@@ -54,6 +65,9 @@ export const BorrowBook = () => {
                     </Button>
                   </td>
                 )}
+                <td>
+                  <Button onClick={() => handleOnReview(item)}>Review</Button>
+                </td>
               </tr>
             ))}
         </tbody>

@@ -27,11 +27,13 @@ export const UserLayout = ({ children, title }) => {
               Books
             </Link>
           </li>
-          <li className="list-unstyled mt-3 ">
-            <Link to="/student" className="nav-link">
-              Student
-            </Link>
-          </li>
+          {user?.role === "admin" && (
+            <li className="list-unstyled mt-3 ">
+              <Link to="/comment" className="nav-link">
+                Reviews
+              </Link>
+            </li>
+          )}
           <hr />
           {user?.role === "admin" && (
             <li className="list-unstyled mt-3 ">

@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { fetchBook } from "./pages/Components/Book-com/bookAction";
 import { EditBook } from "./pages/Components/Book-com/EditBook";
 import { BookLanding } from "./pages/Components/Book-com/BookLanding";
+import { Comment } from "./pages/Components/Book-com/Comment";
 
 function App() {
   const dispatch = useDispatch();
@@ -68,6 +69,14 @@ function App() {
           element={
             <PrivateRoute>
               <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/comment"
+          element={
+            <PrivateRoute>
+              <Comment />
             </PrivateRoute>
           }
         />

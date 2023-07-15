@@ -5,7 +5,7 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 import bookCollection from "./pages/Components/Book-com/bookSlice";
 import borrowCol from "./pages/Borrow-Book/borrowSlice";
 import commentCol from "./pages/Components/comment/commentSlice";
-
+import systemSlice from "./pages/Borrow-Book/systemSlice";
 const userPresistConfig = {
   key: "userInfo",
   storage,
@@ -20,6 +20,7 @@ const store = configureStore({
     booksCol: bookCollection,
     borrowCollection: borrowCol,
     commentCollection: commentCol,
+    systemState: systemSlice,
   },
 });
 

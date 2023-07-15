@@ -1,4 +1,8 @@
-import { postComment, retrieveComment } from "../../../helper/axios";
+import {
+  postComment,
+  retrieveComment,
+  updateCommentAxios,
+} from "../../../helper/axios";
 import { toast } from "react-toastify";
 import { setComments } from "./commentSlice";
 
@@ -18,5 +22,14 @@ export const getComments = () => async (dispatch) => {
   if (status === "success") {
     console.log(comments);
     dispatch(setComments(comments));
+  }
+};
+
+export const updateActivation = (item) => async (dispatch) => {
+  const { status, message } = await updateCommentAxios(item);
+  toast[status](message);
+
+  if (status === "success") {
+    dispatch(getComments());
   }
 };

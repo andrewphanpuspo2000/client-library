@@ -8,7 +8,7 @@ export const Dashboard = () => {
   const { borrowed } = useSelector((state) => state.borrowCollection);
   const dispatch = useDispatch();
   const numberBorrowed = borrowed?.filter(
-    (item) => item.userId === user._id && item.isReturned === false
+    (item) => item.isReturned === false
   ).length;
 
   useEffect(() => {
@@ -22,16 +22,14 @@ export const Dashboard = () => {
             {borrowed?.length > 1 ? (
               <>
                 <h4>
-                  <span className="text-danger">{user.role.toUpperCase()}</span>{" "}
-                  have borrowed
+                  <span className="text-danger">Users</span> have borrowed
                 </h4>
                 <h2>{borrowed?.length}Books</h2>
               </>
             ) : (
               <>
                 <h4>
-                  <span className="text-danger">{user.role.toUpperCase()}</span>{" "}
-                  have borrowed
+                  <span className="text-danger">Users</span> have borrowed
                 </h4>
                 <h2>{borrowed?.length}Book</h2>
               </>

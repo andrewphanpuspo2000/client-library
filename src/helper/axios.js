@@ -99,11 +99,25 @@ export const returnBookHelper = async (item) => {
 };
 
 export const postComment = async (item) => {
-  const { data } = await axios.post(commentAPI, item);
+  const { data } = await axios.post(commentAPI, item, {
+    headers: {
+      Authorization: getLocalStorageInfo(),
+    },
+  });
   return data;
 };
 
 export const retrieveComment = async () => {
   const { data } = await axios.get(commentAPI);
+  return data;
+};
+
+export const updateCommentAxios = async (item) => {
+  const { data } = await axios.patch(commentAPI, item, {
+    headers: {
+      Authorization: getLocalStorageInfo(),
+    },
+  });
+
   return data;
 };

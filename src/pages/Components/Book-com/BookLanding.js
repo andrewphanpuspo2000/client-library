@@ -78,16 +78,16 @@ export const BookLanding = () => {
           <Row className="mb-4">
             <Col>
               <h3>Review</h3>
-              <hr />
-              <Comment bookId={_id} />
               <div className="review-list">
                 {comments.map(
                   (item, i) =>
-                    item.bookId === _id && (
+                    item.bookId === _id &&
+                    item.isActive === "active" && (
                       <CommentList
                         key={item._id}
                         comment={item.comment}
                         author={item.userName}
+                        star={item.star}
                       />
                     )
                 )}
